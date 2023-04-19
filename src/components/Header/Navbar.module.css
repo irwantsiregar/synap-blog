@@ -1,0 +1,27 @@
+.button_loginregister {
+  text-align: center;
+}
+
+#login,
+#register {
+  display: none;
+}
+
+#custom_dropdown {
+  max-width: 40%;
+}
+
+@media (min-width: 992px) {
+  .button_loginregister {
+    display: none;
+  }
+  #login,
+  #register {
+    display: block;
+  }
+
+  #login {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}

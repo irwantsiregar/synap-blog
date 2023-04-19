@@ -11,12 +11,16 @@
   },
   "plugins": ["react"],
   "rules": {
-    "quotes": ["error", "single"],
+    "quotes": ["error", "double"],
+    "linebreak-style": "off",
+    "import/extensions": "off",
+    "jsx-a11y/anchor-is-valid": "off",
     "import/no-unresolved": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "react/prop-types": "off"
   }
 }
