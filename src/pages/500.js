@@ -1,10 +1,10 @@
 import Layout from "@/components/Layout";
-import Notfound from "@/components/ContentBlog/NotFound";
+import ErrorServer from "@/components/Announcement/ErrorServer";
 
 export default function Home() {
   return (
     <Layout>
-      <Notfound />
+      <ErrorServer />
     </Layout>
   );
 }

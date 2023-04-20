@@ -9,7 +9,7 @@ export default function Blog() {
         <div className={styles.blog}>
           <div className="row justify-content-center my-1">
             <div className="col-lg-6 text-end">
-              <Link href="/user/blog/add" class="btn btn-outline-secondary">
+              <Link href="/user/blog/add" className="btn btn-outline-secondary">
                 Add New Post
               </Link>
             </div>

@@ -20,8 +20,8 @@ export default function Profile() {
                       src="https://fakeimg.pl/100x100"
                       alt="ProfilePicture"
                       className="rounded-circle"
-                      width={100}
-                      height={100}
+                      width={150}
+                      height={150}
                     />
                   </div>
                   <div className="card-body d-flex flex-column  justify-content-center align-items-center">

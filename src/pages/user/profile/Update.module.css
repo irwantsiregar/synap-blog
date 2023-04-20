@@ -1,0 +1,9 @@
+.update {
+  padding: 15px 25px;
+}
+
+@media (min-width: 768px) {
+  .update {
+    padding: 20px 0px;
+  }
+}

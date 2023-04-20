@@ -1,5 +1,5 @@
-import Header from "../Header/Navbar";
-import Login from "../ContentBlog/Login";
+import Header from "../Header";
+import Login from "../Login";
 import styles from "./Layout.module.css";
 
 export default function Layout({ children }) {

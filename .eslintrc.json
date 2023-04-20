@@ -12,15 +12,18 @@
   "plugins": ["react"],
   "rules": {
     "quotes": ["error", "double"],
+    "no-console": "off",
     "linebreak-style": "off",
+    "react/prop-types": "off",
     "import/extensions": "off",
+    "object-curly-newline": "off",
     "jsx-a11y/anchor-is-valid": "off",
+    "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": "off",
     "react/jsx-props-no-spreading": "off",
     "import/no-extraneous-dependencies": "off",
-    "jsx-a11y/label-has-associated-control": "off",
-    "react/prop-types": "off"
+    "jsx-a11y/label-has-associated-control": "off"
   }
 }

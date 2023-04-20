@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import Link from "next/link";
 import styles from "./ContentBlog.module.css";
 
-export default function ContentBlog() {
+export default function ContentBlog({ posts }) {
   return (
     <div className="container">
       <div className={styles.content_blog}>
@@ -16,98 +17,25 @@ export default function ContentBlog() {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6 col-lg-4">
-            <div className="p-3 d-flex justify-content-center">
-              <div className="card" style={{ width: "18rem" }}>
-                <img
-                  src="https://fakeimg.pl/350x200/ff0000,128/000,255/?text=Hello"
-                  className="card-img-top"
-                  alt="fakeimage"
-                />
-                <div className="card-body">
-                  <Link href="/detail/3">
-                    <h5 className="card-title">Card title</h5>
-                  </Link>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    upthe bulk of the cards
-                  </p>
+          {posts.map(({ id, title, body }) => (
+            <div className="col-md-6 col-lg-4" key={id}>
+              <div className="p-3 d-flex justify-content-center">
+                <div className="card" style={{ width: "18rem" }}>
+                  <img
+                    src="https://fakeimg.pl/350x200/e7e7e7/?text=2023"
+                    className="card-img-top"
+                    alt="fakeimage"
+                  />
+                  <div className="card-body">
+                    <Link href={`/detail/${id}`}>
+                      <h5 className="card-title">{title.slice(0, 24)}</h5>
+                    </Link>
+                    <p className="card-text text-break">{body.slice(0, 80)}</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-6 col-lg-4">
-            <div className="d-flex justify-content-center p-3">
-              <div className="card shadow-sm" style={{ width: "18rem" }}>
-                <img
-                  src="https://fakeimg.pl/350x200/ff0000,128/000,255/?text=Hello"
-                  className="card-img-top"
-                  alt="fakeimage"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    upthe bulk of the cards
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-4">
-            <div className="d-flex justify-content-center p-3">
-              <div className="card" style={{ width: "18rem" }}>
-                <img
-                  src="https://fakeimg.pl/350x200/ff0000,128/000,255/?text=Hello"
-                  className="card-img-top"
-                  alt="fakeimage"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    upthe bulk of the cards
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-4">
-            <div className="d-flex justify-content-center p-3">
-              <div className="card" style={{ width: "18rem" }}>
-                <img
-                  src="https://fakeimg.pl/350x200/ff0000,128/000,255/?text=Hello"
-                  className="card-img-top"
-                  alt="fakeimage"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    upthe bulk of the cards
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-4">
-            <div className="d-flex justify-content-center p-3">
-              <div className="card" style={{ width: "18rem" }}>
-                <img
-                  src="https://fakeimg.pl/350x200/ff0000,128/000,255/?text=Hello"
-                  className="card-img-top"
-                  alt="fakeimage"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    Some quick example text to build on the card title and make
-                    upthe bulk of the cards
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

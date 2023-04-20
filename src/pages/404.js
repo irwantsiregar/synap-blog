@@ -1,10 +1,10 @@
 import Layout from "@/components/Layout";
-import Notfound from "@/components/ContentBlog/NotFound";
+import NotFound from "@/components/Announcement/NotFound";
 
 export default function Home() {
   return (
     <Layout>
-      <Notfound />
+      <NotFound />
     </Layout>
   );
 }
