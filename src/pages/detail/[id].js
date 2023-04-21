@@ -15,7 +15,7 @@ export default function Detail({ detail }) {
           <div className="detail_body_post">
             <div className="card mt-4 p-4 pb-5 shadow-sw">
               <div className="card-body">
-                <h1 className="card-title">{title || "Anonymous"}</h1>
+                <h1 className="card-title">{title}</h1>
                 <h6 className="card-subtitle mb-3 mt-1">{author}</h6>
                 <p className="card-text text">{body}</p>
               </div>

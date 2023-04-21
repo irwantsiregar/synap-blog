@@ -1,12 +1,12 @@
-import { config } from "@/utils/config";
+import { fetchWithAuth } from "./fetchWithAuth";
 
 async function getAllUsers() {
-  const response = await fetch(`${config.api_host}/users`);
+  const response = await fetchWithAuth("/users");
   return response.json();
 }
 
 async function getUser(userId) {
-  const response = await fetch(`${config.api_host}/users/${userId}`);
+  const response = await fetchWithAuth(`/users/${userId}`);
   return response.json();
 }
 

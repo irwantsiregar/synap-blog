@@ -2,8 +2,7 @@ import { postCommentOnPost } from "../api/comments";
 
 export async function addCommentOnPost({ postId, name, email, body }) {
   try {
-    const comment = await postCommentOnPost({ postId, name, email, body });
-    return comment;
+    return await postCommentOnPost({ postId, name, email, body });
   } catch (error) {
     return error;
   }

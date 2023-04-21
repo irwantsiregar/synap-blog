@@ -1,10 +1,8 @@
-/* eslint-disable no-console */
 import { getAllUsers } from "../api/users";
 
 export async function receiveAllUser() {
   try {
-    const users = await getAllUsers();
-    return users;
+    return await getAllUsers();
   } catch (error) {
     return error;
   }

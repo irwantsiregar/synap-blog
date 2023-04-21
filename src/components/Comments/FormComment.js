@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-expressions */
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { rules } from "./Validation";
@@ -7,6 +7,7 @@ import { addCommentOnPost } from "@/features/comment";
 export default function FormComment({ postId }) {
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
+  const router = useRouter();
 
   const {
     register,
@@ -16,12 +17,10 @@ export default function FormComment({ postId }) {
 
   const onSubmit = async (data) => {
     const response = await addCommentOnPost({ postId, ...data });
-    response.message ? setMessage(response.message) : setStatus(true);
+    response?.id ? setStatus(true) : setMessage(response.message);
+    status ? router.push(`/detail/${response.id}`) : null;
     console.log({ postId, ...data });
-    console.log(response);
   };
-
-  // console.log(watch(rules.email));
 
   return (
     <div className="add_comment">

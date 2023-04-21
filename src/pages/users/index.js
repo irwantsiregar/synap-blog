@@ -34,7 +34,11 @@ export default function Users({ users }) {
                     <div className="card-body d-flex flex-column  justify-content-center align-items-center">
                       <h5 className="card-title">{name}</h5>
                       <p className="card-text text-center">
-                        <span className="badge rounded-pill bg-success mx-3">
+                        <span
+                          className={`badge rounded-pill bg-${
+                            status === "active" ? "success" : "secondary"
+                          } mx-3`}
+                        >
                           {status}
                         </span>
                       </p>

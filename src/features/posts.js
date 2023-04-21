@@ -1,11 +1,10 @@
-import { getAllPosts, getPostDetail } from "../api/posts";
 import { getUser } from "../api/users";
+import { getAllPosts, getPostDetail } from "../api/posts";
 import { getAllCommentsPost } from "../api/comments";
 
 async function receiveAllPosts() {
   try {
-    const posts = await getAllPosts();
-    return posts;
+    return await getAllPosts();
   } catch (error) {
     return error;
   }
