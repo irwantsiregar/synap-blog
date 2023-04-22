@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Layout from "@/components/Layout";
 import styles from "./Add.module.css";
-import { validationSchema } from "./Validation";
+import { validationSchema } from "@/components/Posts/Validation";
 import { getLocalStorage } from "@/api/user";
 import { addBlogPosts } from "@/features/posts";
 import ClipSpinner from "@/components/Announcement/ClipSpinner";
