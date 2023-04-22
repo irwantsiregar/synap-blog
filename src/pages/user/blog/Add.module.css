@@ -1,0 +1,9 @@
+.create_post {
+  padding: 15px 25px;
+}
+
+@media (min-width: 768px) {
+  .create_post {
+    padding: 20px 0px;
+  }
+}

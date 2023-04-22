@@ -1,19 +1,21 @@
-/* eslint-disable quotes */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import Head from "next/head";
-import "bootstrap/dist/css/bootstrap.css";
-// import styles from '@/styles/Home.module.css';
+import Layout from "@/components/Layout";
+import ContentBlog from "@/components/ContentBlog";
+import { receiveAllPosts } from "@/features/posts";
+// import PropTypes from "prop-types";
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
-    <>
-      <Head>
-        <title>Create Next App</title>
-        <meta name="description" content="Blog Synap" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main></main>
-    </>
+    <Layout>
+      <ContentBlog posts={posts} />
+    </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  const posts = await receiveAllPosts();
+  return {
+    props: {
+      posts,
+    },
+  };
 }

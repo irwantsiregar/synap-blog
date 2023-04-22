@@ -1,0 +1,9 @@
+.register {
+  padding: 15px 25px;
+}
+
+@media (min-width: 768px) {
+  .register {
+    padding: 20px 0px;
+  }
+}
