@@ -1,5 +1,5 @@
 import { getUser } from "../api/users";
-import { getAllPosts, getPostDetail } from "../api/posts";
+import { getAllPosts, getPostDetail, postBlogPosts } from "../api/posts";
 import { getAllCommentsPost } from "../api/comments";
 
 async function receiveAllPosts() {
@@ -21,4 +21,12 @@ async function receivePostDetail(postId) {
   }
 }
 
-export { receiveAllPosts, receivePostDetail };
+async function addBlogPosts({ userId, title, body }) {
+  try {
+    return await postBlogPosts({ userId, title, body });
+  } catch (error) {
+    return error;
+  }
+}
+
+export { receiveAllPosts, receivePostDetail, addBlogPosts };

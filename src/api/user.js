@@ -18,7 +18,7 @@ async function register({ name, email, gender, status }) {
   return responseJson;
 }
 
-async function login(userId = 0) {
+async function getOwnProfile(userId = 0) {
   const response = await fetchWithAuth(`/users/${userId}`);
   const responseJson = await response.json();
 
@@ -29,20 +29,25 @@ async function login(userId = 0) {
   return responseJson;
 }
 
-function putUserId(id) {
-  localStorage.setItem("userId", id);
+async function getAllUserBlogPosts(userId = 0) {
+  const response = await fetchWithAuth(`/users/${userId}/posts`);
+  const responseJson = await response.json();
+  return responseJson;
 }
 
-function getUserId() {
-  return localStorage.getItem("userId");
+function getLocalStorage(key) {
+  if (typeof window !== "undefined") return localStorage.getItem(key);
+  return "";
 }
 
-function putAuthUser(id) {
-  localStorage.setItem("authUser", id);
+function putLocalStorage(key, value) {
+  if (typeof window !== "undefined") localStorage.setItem(key, value);
 }
 
-function getAuthUser() {
-  localStorage.getItem("authUser");
-}
-
-export { register, login, putUserId, getUserId, putAuthUser, getAuthUser };
+export {
+  register,
+  getOwnProfile,
+  getAllUserBlogPosts,
+  getLocalStorage,
+  putLocalStorage,
+};

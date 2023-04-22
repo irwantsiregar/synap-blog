@@ -1,8 +1,11 @@
 import Link from "next/link";
 import Layout from "@/components/Layout";
 import styles from "./Blog.module.css";
+import { receiveUserBlogPosts } from "@/features/user";
+// import { getLocalStorage } from "@/api/user";
 
-export default function Blog() {
+export default function Blog({ blogPosts }) {
+  console.log(blogPosts);
   return (
     <Layout>
       <div className="container">
@@ -62,4 +65,15 @@ export default function Blog() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  // const authUser = getLocalStorage("authUser");
+  const blogPosts = await receiveUserBlogPosts(1143408);
+
+  return {
+    props: {
+      blogPosts,
+    },
+  };
 }

@@ -1,10 +1,8 @@
-/* eslint-disable no-console */
 import Layout from "@/components/Layout";
 import styles from "./Users.module.css";
 import { receiveAllUser } from "@/features/users";
 
 export default function Users({ users }) {
-  // console.log(users);
   return (
     <Layout>
       <div className="container">

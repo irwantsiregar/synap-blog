@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { registerUser } from "@/features/user";
 import { validationSchema } from "./Validation";
 import styles from "./Register.module.css";
+import { putLocalStorage } from "@/api/user";
 
 export default function Register() {
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
+  const [userId, setUserId] = useState("");
   const {
     register,
     handleSubmit,
@@ -14,9 +16,14 @@ export default function Register() {
     formState: { errors },
   } = useForm(validationSchema);
 
-  const successSubmit = () => {
+  useEffect(() => {
+    putLocalStorage("userId", userId);
+  }, [userId]);
+
+  const successSubmit = (id) => {
     setMessage("");
-    setStatus(true);
+    setStatus(!status);
+    setUserId(id);
     reset(validationSchema.defaultValues);
   };
 
@@ -27,7 +34,7 @@ export default function Register() {
 
   const onSubmit = async (data) => {
     const response = await registerUser(data);
-    response.id ? successSubmit() : failedSubmit(response.message);
+    response.id ? successSubmit(response.id) : failedSubmit(response.message);
   };
 
   return (

@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Layout from "@/components/Layout";
+import { receiveUserProfile } from "@/features/user";
 
-export default function Profile() {
+export default function Profile({ userActive }) {
+  const { name, email, status } = userActive;
+
   return (
     <Layout>
       <div className="container">
@@ -26,12 +29,16 @@ export default function Profile() {
                   </div>
                   <div className="card-body d-flex flex-column  justify-content-center align-items-center">
                     <p className="card-text">
-                      <span className="badge rounded-pill bg-success mx-3">
-                        Active
+                      <span
+                        className={`badge rounded-pill bg-${
+                          status === "active" ? "success" : "secondary"
+                        } mx-3`}
+                      >
+                        {status}
                       </span>
                     </p>
-                    <h3 className="card-title">Irwanto SIregar</h3>
-                    <h6 className="card-title">irwantsIregar@gmail.com</h6>
+                    <h3 className="card-title">{name}</h3>
+                    <h6 className="card-title">{email}</h6>
                   </div>
                 </div>
               </div>
@@ -41,4 +48,15 @@ export default function Profile() {
       </div>
     </Layout>
   );
+}
+
+export async function getServerSideProps() {
+  const userActive = await receiveUserProfile(1);
+  console.log(userActive);
+
+  return {
+    props: {
+      userActive,
+    },
+  };
 }

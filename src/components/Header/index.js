@@ -1,7 +1,23 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
+import { getLocalStorage, putLocalStorage } from "@/api/user";
 
 export default function Nvabar() {
+  const [auth, setAuth] = useState(0);
+  const router = useRouter();
+
+  useEffect(() => {
+    const user = getLocalStorage("authUser");
+    setAuth(user);
+  }, []);
+
+  const logout = () => {
+    putLocalStorage("authUser", "");
+    router.push("/");
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,49 +61,59 @@ export default function Nvabar() {
                   Users
                 </Link>
               </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Account
-                </Link>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="navbarDropdown"
-                  id={styles.custom_dropdown}
-                >
-                  <li>
-                    <Link className="dropdown-item" href="/user/blog">
-                      My Blog
+              {auth ? (
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Account
+                  </Link>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                    id={styles.custom_dropdown}
+                  >
+                    <li>
+                      <Link className="dropdown-item" href="/user/blog">
+                        My Blog
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" href="/user/profile">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" href="/" onClick={logout}>
+                        Logout
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              ) : (
+                <>
+                  <li className="nav-item" id={styles.login}>
+                    <Link
+                      href="/"
+                      className="btn btn-outline-dark"
+                      data-bs-toggle="modal"
+                      data-bs-target="#loginModal"
+                    >
+                      Login
                     </Link>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" href="/user/profile">
-                      Profile
+                  <li className="nav-item" id={styles.register}>
+                    <Link href="/register" className="btn btn-dark">
+                      Register
                     </Link>
                   </li>
-                </ul>
-              </li>
-              <li className="nav-item" id={styles.login}>
-                <Link
-                  href="/"
-                  className="btn btn-outline-dark"
-                  data-bs-toggle="modal"
-                  data-bs-target="#loginModal"
-                >
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item" id={styles.register}>
-                <Link href="/register" className="btn btn-dark">
-                  Register
-                </Link>
-              </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

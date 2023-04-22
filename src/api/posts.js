@@ -10,4 +10,21 @@ async function getPostDetail(postId) {
   return response.json();
 }
 
-export { getPostDetail, getAllPosts };
+async function postBlogPosts({ userId, title, body }) {
+  const response = await fetchWithAuth(`/users/${userId}/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ title, body }),
+  });
+  const responseJson = await response.json();
+
+  if (!responseJson?.id) {
+    throw new Error(responseJson.message);
+  }
+
+  return responseJson;
+}
+
+export { getPostDetail, getAllPosts, postBlogPosts };

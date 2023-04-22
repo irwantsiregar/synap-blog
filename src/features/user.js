@@ -1,30 +1,39 @@
-import {
-  register,
-  login,
-  putUserId,
-  getUserId,
-  putAuthUser,
-} from "../api/user";
+import { register, getOwnProfile, getAllUserBlogPosts } from "../api/user";
 
 async function registerUser({ name, email, gender, status }) {
   try {
     const registered = await register({ name, email, gender, status });
-    putUserId(registered?.id);
     return registered;
   } catch (error) {
     return error;
   }
 }
 
-async function loginUser({ email }) {
+async function loginUser({ email, userId }) {
   try {
-    const user = await login(getUserId());
+    const user = await getOwnProfile(userId);
     if (user?.email !== email) return {};
-    putAuthUser(user.id);
     return user;
   } catch (error) {
     return error;
   }
 }
 
-export { registerUser, loginUser };
+async function receiveUserProfile(userId) {
+  try {
+    const user = await getOwnProfile(userId);
+    return user;
+  } catch (error) {
+    return error;
+  }
+}
+async function receiveUserBlogPosts(userId) {
+  try {
+    const userPost = await getAllUserBlogPosts(userId);
+    return userPost;
+  } catch (error) {
+    return error;
+  }
+}
+
+export { registerUser, loginUser, receiveUserProfile, receiveUserBlogPosts };

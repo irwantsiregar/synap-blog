@@ -1,27 +1,27 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-// import { useState } from "react";
-// import { loginUser } from "@/features/user";
 import { validationSchema } from "./Validation";
 import { loginUser } from "@/features/user";
+import { getLocalStorage, putLocalStorage } from "@/api/user";
 
 export default function Login() {
-  const [authUser, setAuthUser] = useState(false);
   const router = useRouter();
   const [message, setMessage] = useState(false);
+  const [authUser, setAuthUser] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm(validationSchema);
 
-  const successAuth = () => {
+  const successAuth = (id) => {
     setMessage(false);
-    setAuthUser(true);
-    setTimeout(() => {
-      router.reload();
-    }, 200);
+    setAuthUser(id);
+    putLocalStorage("userId", id);
+    putLocalStorage("authUser", id);
+    setTimeout(() => router.push("/users"), 120);
   };
 
   const failedAuth = () => {
@@ -30,8 +30,9 @@ export default function Login() {
   };
 
   const onSubmit = async (data) => {
-    const response = await loginUser(data);
-    response?.id ? successAuth() : failedAuth();
+    const userId = getLocalStorage("userId");
+    const response = await loginUser({ userId, ...data });
+    response?.id ? successAuth(response.id) : failedAuth();
   };
 
   return (
