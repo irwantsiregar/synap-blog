@@ -5,10 +5,12 @@ import styles from "./Add.module.css";
 import { validationSchema } from "./Validation";
 import { getLocalStorage } from "@/api/user";
 import { addBlogPosts } from "@/features/posts";
+import ClipSpinner from "@/components/Announcement/ClipSpinner";
 
 export default function NewPost() {
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -18,9 +20,9 @@ export default function NewPost() {
   } = useForm(validationSchema);
 
   const successAuth = () => {
+    reset(validationSchema.defaultValues);
     setStatus(true);
     setMessage(false);
-    reset(validationSchema.defaultValues);
     setTimeout(() => setStatus(false), 3000);
   };
 
@@ -29,9 +31,11 @@ export default function NewPost() {
   };
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const userId = getLocalStorage("authUser");
     const response = await addBlogPosts({ userId, ...data });
     response?.id ? successAuth(response.id) : failedAuth();
+    setLoading(false);
   };
 
   return (
@@ -85,8 +89,12 @@ export default function NewPost() {
                     {errors.body?.message}
                   </div>
                 </div>
-                <button type="submit" className="btn btn-dark mt-2">
-                  Create Posts
+                <button
+                  type="submit"
+                  className="btn btn-dark mt-2"
+                  disabled={loading}
+                >
+                  {loading ? <ClipSpinner /> : "Create Posts"}
                 </button>
               </form>
             </div>

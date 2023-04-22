@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import Link from "next/link";
 import styles from "./ContentBlog.module.css";
 

@@ -27,6 +27,7 @@ async function receiveUserProfile(userId) {
     return error;
   }
 }
+
 async function receiveUserBlogPosts(userId) {
   try {
     const userPost = await getAllUserBlogPosts(userId);

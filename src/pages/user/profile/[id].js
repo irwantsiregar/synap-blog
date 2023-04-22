@@ -50,9 +50,8 @@ export default function Profile({ userActive }) {
   );
 }
 
-export async function getServerSideProps() {
-  const userActive = await receiveUserProfile(1);
-  console.log(userActive);
+export async function getServerSideProps({ params }) {
+  const userActive = await receiveUserProfile(params.id);
 
   return {
     props: {

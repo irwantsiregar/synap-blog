@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import { getLocalStorage, putLocalStorage } from "@/api/user";
 
-export default function Nvabar() {
+export default function Navbar() {
   const [auth, setAuth] = useState(0);
   const router = useRouter();
 
@@ -79,23 +79,30 @@ export default function Nvabar() {
                     id={styles.custom_dropdown}
                   >
                     <li>
-                      <Link className="dropdown-item" href="/user/blog">
+                      <Link
+                        className="dropdown-item"
+                        href={`/user/blog/${auth}`}
+                      >
                         My Blog
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" href="/user/profile">
+                      <Link
+                        className="dropdown-item"
+                        href={`/user/profile/${auth}`}
+                      >
                         Profile
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" href="/" onClick={logout}>
+                      <Link className="dropdown-item" href="#" onClick={logout}>
                         Logout
                       </Link>
                     </li>
                   </ul>
                 </li>
-              ) : (
+              ) : null}
+              {!auth ? (
                 <>
                   <li className="nav-item" id={styles.login}>
                     <Link
@@ -113,7 +120,7 @@ export default function Nvabar() {
                     </Link>
                   </li>
                 </>
-              )}
+              ) : null}
             </ul>
           </div>
         </div>

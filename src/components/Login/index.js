@@ -21,7 +21,7 @@ export default function Login() {
     setAuthUser(id);
     putLocalStorage("userId", id);
     putLocalStorage("authUser", id);
-    setTimeout(() => router.push("/users"), 120);
+    router.reload();
   };
 
   const failedAuth = () => {
