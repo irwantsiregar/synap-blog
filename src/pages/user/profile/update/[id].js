@@ -6,10 +6,12 @@ import Layout from "@/components/Layout";
 import { updateUser, receiveUserProfile } from "@/features/user";
 import styles from "./Update.module.css";
 import { validationSchema } from "@/components/Register/Validation";
+import ClipSpinner from "@/components/Announcement/ClipSpinner";
 
 export default function Update({ userActive }) {
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -23,7 +25,7 @@ export default function Update({ userActive }) {
   const successSubmit = () => {
     setMessage("");
     setStatus(!status);
-    setTimeout(() => router.push(`/user/profile/${userActive.id}`), 2000);
+    setTimeout(() => router.push(`/user/profile/${userActive.id}`), 1200);
   };
 
   const failedSubmit = (_message) => {
@@ -32,8 +34,10 @@ export default function Update({ userActive }) {
   };
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const response = await updateUser({ userId: userActive.id, ...data });
     response.id ? successSubmit(response.id) : failedSubmit(response.message);
+    setLoading(false);
   };
 
   return (
@@ -153,8 +157,12 @@ export default function Update({ userActive }) {
                     {errors.status?.message}
                   </div>
                 </div>
-                <button type="submit" className="btn btn-dark mt-2">
-                  Update
+                <button
+                  type="submit"
+                  className="btn btn-dark mt-2"
+                  disabled={loading}
+                >
+                  {loading ? <ClipSpinner /> : "Update"}
                 </button>
               </form>
             </div>
