@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Layout from "@/components/Layout";
+import Alert from "@/components/Alert";
 import styles from "./Blog.module.css";
 import { receiveUserBlogPosts } from "@/features/user";
 
@@ -17,16 +18,20 @@ export default function Blog({ blogPosts }) {
           </div>
           <div className="row justify-content-center">
             <div className="col-lg-4 col-md-6">
-              {blogPosts.map(({ id, title }, index) => (
-                <div className="card shadow-sm my-3" key={id}>
-                  <div className="card-body">
-                    <p className="card-text">
-                      <span className="badge bg-info">{index + 1}</span>
-                      <span className="px-2">{title.slice(0, 40)}</span>
-                    </p>
+              {blogPosts.length ? (
+                blogPosts.map(({ id, title }, index) => (
+                  <div className="card shadow-sm my-3" key={id}>
+                    <div className="card-body">
+                      <p className="card-text">
+                        <span className="badge bg-info">{index + 1}</span>
+                        <span className="px-2">{title.slice(0, 40)}</span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              ) : (
+                <Alert color="info">Blog post not available !</Alert>
+              )}
             </div>
           </div>
         </div>

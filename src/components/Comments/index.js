@@ -1,13 +1,15 @@
-export default function Comments({ id, name, body }) {
+import Image from "next/image";
+
+export default function Comments({ id, name, body, gender }) {
   return (
     <div className="card-image d-flex my-2" key={id}>
       <div className="p-2">
-        <img
-          src="https://fakeimg.pl/100x100"
-          alt="user"
+        <Image
+          src={`/avatar/${gender === "male" ? "male.png" : "female.png"}`}
+          alt={name}
           className="rounded-circle"
-          width={55}
-          height={55}
+          width={65}
+          height={60}
         />
       </div>
       <div className="card-body">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./ContentBlog.module.css";
 
 export default function ContentBlog({ posts }) {
@@ -20,10 +21,12 @@ export default function ContentBlog({ posts }) {
             <div className="col-md-6 col-lg-4" key={id}>
               <div className="p-3 d-flex justify-content-center">
                 <div className="card" style={{ width: "18rem" }}>
-                  <img
-                    src="https://fakeimg.pl/350x200/e7e7e7/?text=2023"
-                    className="card-img-top"
-                    alt="fakeimage"
+                  <Image
+                    src="/avatar/twothree.png"
+                    alt={title}
+                    width={210}
+                    height={150}
+                    className="m-auto"
                   />
                   <div className="card-body">
                     <Link href={`/detail/${id}`}>

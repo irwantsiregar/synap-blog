@@ -3,6 +3,7 @@ import styles from "./Detail.module.css";
 import Comments from "@/components/Comments";
 import FormComment from "@/components/Comments/FormComment";
 import { receivePostDetail } from "@/features/posts";
+import Alert from "@/components/Alert";
 
 export default function Detail({ detail }) {
   const { id, author, title, body, comments } = detail;
@@ -11,17 +12,17 @@ export default function Detail({ detail }) {
     <Layout>
       <div className="container">
         <div className={styles.detail}>
-          {/* Detail Blog Post */}
           <div className="detail_body_post">
             <div className="card mt-4 p-4 pb-5 shadow-sw">
               <div className="card-body">
                 <h1 className="card-title">{title}</h1>
-                <h6 className="card-subtitle mb-3 mt-1">{author}</h6>
-                <p className="card-text text">{body}</p>
+                <h6 className="card-subtitle mb-4 mt-1">{author}</h6>
+                <p className="card-text text" style={{ textAlign: "justify" }}>
+                  {body}
+                </p>
               </div>
             </div>
           </div>
-          {/* Comments */}
           <div className={styles.comments}>
             <div className="card my-4 shadow-sm p-4">
               <h2 className="">
@@ -35,7 +36,7 @@ export default function Detail({ detail }) {
                     <Comments key={comment.id} {...comment} />
                   ))
                 ) : (
-                  <h2>Comment not available !</h2>
+                  <Alert color="secondary">Comment not available !</Alert>
                 )}
               </div>
             </div>

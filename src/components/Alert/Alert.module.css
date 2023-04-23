@@ -1,0 +1,17 @@
+.success {
+  border: 1px solid rgb(9, 122, 9);
+}
+
+.icon_success {
+  color: rgb(9, 122, 9);
+  margin-right: 8px;
+}
+
+.warning {
+  border: 1px solid rgb(224, 186, 13);
+}
+
+.icon_warning {
+  color: rgb(224, 186, 13);
+  margin-right: 8px;
+}

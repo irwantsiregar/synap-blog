@@ -1,21 +1,36 @@
 import { fetchWithAuth } from "./fetchWithAuth";
 
-async function register({ name, email, gender, status }) {
-  const response = await fetchWithAuth("/users", {
-    method: "POST",
+async function registerAndPatchUser({ userId = "", method, data }) {
+  const response = await fetchWithAuth(`/users/${userId}`, {
+    method,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, gender, status }),
+    body: JSON.stringify(data),
   });
   const responseJson = await response.json();
 
   if (!responseJson?.id) {
+    if (responseJson?.message) throw new Error(responseJson.message);
     const [{ field, message }] = responseJson;
     throw new Error(`${field} ${message}`);
   }
 
   return responseJson;
+}
+
+async function register({ name, email, gender, status }) {
+  return registerAndPatchUser({
+    method: "POST",
+    data: { name, email, gender, status },
+  });
+}
+async function patchUser({ userId, name, email, gender, status }) {
+  return registerAndPatchUser({
+    userId,
+    method: "PATCH",
+    data: { name, email, gender, status },
+  });
 }
 
 async function getOwnProfile(userId = 0) {
@@ -46,6 +61,7 @@ function putLocalStorage(key, value) {
 
 export {
   register,
+  patchUser,
   getOwnProfile,
   getAllUserBlogPosts,
   getLocalStorage,

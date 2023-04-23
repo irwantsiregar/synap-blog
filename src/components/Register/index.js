@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { registerUser } from "@/features/user";
 import { validationSchema } from "./Validation";
+import Alert from "../Alert";
 import styles from "./Register.module.css";
 import { putLocalStorage } from "@/api/user";
 
@@ -9,6 +10,7 @@ export default function Register() {
   const [status, setStatus] = useState(false);
   const [message, setMessage] = useState("");
   const [userId, setUserId] = useState("");
+
   const {
     register,
     handleSubmit,
@@ -48,15 +50,11 @@ export default function Register() {
         <div className="row justify-content-center">
           <div className="col-lg-4 col-md-6">
             {status ? (
-              <div className="alert alert-success" role="alert">
+              <Alert color="success">
                 Register successfully. Please log in
-              </div>
+              </Alert>
             ) : null}
-            {message ? (
-              <div className="alert alert-danger" role="alert">
-                {message}
-              </div>
-            ) : null}
+            {message ? <Alert color="warning">{message}</Alert> : null}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">

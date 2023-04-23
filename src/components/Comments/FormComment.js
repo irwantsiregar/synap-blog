@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { rules } from "./Validation";
+import Alert from "../Alert";
+import { validationSchema } from "./Validation";
 import { addCommentOnPost } from "@/features/comment";
 
 export default function FormComment({ postId }) {
@@ -12,14 +13,15 @@ export default function FormComment({ postId }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm(validationSchema);
 
   const onSubmit = async (data) => {
     const response = await addCommentOnPost({ postId, ...data });
     response?.id ? setStatus(true) : setMessage(response.message);
-    status ? router.push(`/detail/${response.id}`) : null;
-    console.log({ postId, ...data });
+    status ? router.reload() : null;
+    reset(validationSchema.defaultValues);
   };
 
   return (
@@ -29,22 +31,16 @@ export default function FormComment({ postId }) {
         <div className="row justify-content-center my-3">
           <div className="col-md-6">
             {status ? (
-              <div className="alert alert-success" role="alert">
-                Comment successfully added..
-              </div>
+              <Alert color="success">Comment successfully added..</Alert>
             ) : null}
-            {message ? (
-              <div className="alert alert-warning" role="alert">
-                {message}
-              </div>
-            ) : null}
+            {message ? <Alert color="success">{message}</Alert> : null}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
                   Name
                 </label>
                 <input
-                  {...register("name", rules.name)}
+                  {...register("name")}
                   className="form-control"
                   id="name"
                   aria-describedby="nameHelp"
@@ -60,9 +56,10 @@ export default function FormComment({ postId }) {
                 </label>
                 <input
                   type="email"
-                  {...register("email", rules.email)}
+                  {...register("email")}
                   className="form-control"
                   id="email"
+                  placeholder="johndoe@mail.com"
                   aria-describedby="emailHelp"
                 />
                 <div id="emailHelp" className="form-text text-danger">
@@ -74,7 +71,7 @@ export default function FormComment({ postId }) {
                   Comment
                 </label>
                 <textarea
-                  {...register("body", rules.body)}
+                  {...register("body")}
                   className="form-control"
                   id="body"
                   rows="3"
