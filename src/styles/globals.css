@@ -22,8 +22,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   font-family: "Inter", sans-serif !important;
-  /* font-family: "Inter", "Poppins", sans-serif !important; */
-  background-color: #FFF;
+  background-color: #fdfdfd !important;
 }
 
 #__next {

@@ -1,9 +1,23 @@
-import { register, getOwnProfile, getAllUserBlogPosts } from "../api/user";
+import {
+  register,
+  patchUser,
+  getOwnProfile,
+  getAllUserBlogPosts,
+} from "../api/user";
 
 async function registerUser({ name, email, gender, status }) {
   try {
     const registered = await register({ name, email, gender, status });
     return registered;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function updateUser({ userId, name, email, gender, status }) {
+  try {
+    const updated = await patchUser({ userId, name, email, gender, status });
+    return updated;
   } catch (error) {
     return error;
   }
@@ -37,4 +51,10 @@ async function receiveUserBlogPosts(userId) {
   }
 }
 
-export { registerUser, loginUser, receiveUserProfile, receiveUserBlogPosts };
+export {
+  registerUser,
+  updateUser,
+  loginUser,
+  receiveUserProfile,
+  receiveUserBlogPosts,
+};

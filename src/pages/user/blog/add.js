@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Layout from "@/components/Layout";
+import Alert from "@/components/Alert";
 import styles from "./Add.module.css";
 import { validationSchema } from "@/components/Posts/Validation";
 import { getLocalStorage } from "@/api/user";
@@ -50,15 +51,9 @@ export default function NewPost() {
           <div className="row justify-content-center">
             <div className="col-lg-4 col-md-6">
               {status ? (
-                <div className="alert alert-success" role="alert">
-                  Post successfully added..
-                </div>
+                <Alert color="success">Post successfully added..</Alert>
               ) : null}
-              {message ? (
-                <div className="alert alert-warning" role="alert">
-                  {message}
-                </div>
-              ) : null}
+              {message ? <Alert color="warning">{message}</Alert> : null}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">
                   <label htmlFor="title" className="form-label">
