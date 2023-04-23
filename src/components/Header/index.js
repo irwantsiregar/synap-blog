@@ -17,7 +17,7 @@ export default function Navbar() {
   const logout = () => {
     putLocalStorage("authUser", "");
     router.push("/");
-    setTimeout(() => router.reload(), 500);
+    setTimeout(() => router.reload(), 1000);
   };
 
   return (
